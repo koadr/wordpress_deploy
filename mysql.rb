@@ -6,7 +6,7 @@ namespace :mysql do
       You will need to enter both the admin_password \
       as well as the password for the database you are creating (mysql_password).
       EOF
-  task :create_database, roles: :db, only: {primary: true} do
+  task :create_db, roles: :db, only: {primary: true} do
      on_rollback { drop_db }
      sql = <<-MYSQL
      CREATE DATABASE IF NOT EXISTS #{mysql_database};
@@ -19,9 +19,9 @@ namespace :mysql do
 
 
   desc <<-DESC
-      Drop the MySQL database.
-    DESC
-    task :drop_db, :roles => :db do
-      run "mysql --user=root --host=localhost --password=#{admin_password}  --execute=\"DROP DATABASE IF EXISTS #{mysql_database};\""
-    end
+    Drop the MySQL database.
+  DESC
+  task :drop_db, :roles => :db, only: {primary: true}  do
+    run "mysql --user=root --host=localhost --password=#{admin_password}  --execute=\"DROP DATABASE IF EXISTS #{mysql_database};\""
+  end
 end
