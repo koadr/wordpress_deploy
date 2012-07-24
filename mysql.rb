@@ -13,7 +13,7 @@ namespace :mysql do
      GRANT ALL ON #{mysql_database}.* TO '#{mysql_user}'@'%' IDENTIFIED BY '#{mysql_password}';
      GRANT RELOAD ON *.* TO '#{mysql_user}'@'%' IDENTIFIED BY '#{mysql_password}';
   MYSQL
-    run "mysql --user=root --host=#{mysql_host} --password=#{admin_password} --execute=\"#{sql}\""
+    run "mysql --user=root --host=localhost --password=#{admin_password} --execute=\"#{sql}\""
   end
   after "deploy:setup", "mysql:create_database"
 
@@ -22,6 +22,6 @@ namespace :mysql do
       Drop the MySQL database.
     DESC
     task :drop_db, :roles => :db do
-      run "mysql --user=root --host=#{mysql_host} --password=#{admin_password}  --execute=\"DROP DATABASE IF EXISTS #{mysql_database};\""
+      run "mysql --user=root --host=localhost --password=#{admin_password}  --execute=\"DROP DATABASE IF EXISTS #{mysql_database};\""
     end
 end
