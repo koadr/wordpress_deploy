@@ -27,11 +27,4 @@ namespace :wordpress do
     end
   end
 
-  namespace :config do
-    desc "Uploads local config file to #{release_path}"
-    task :upload_config, :roles => :app do
-      template("wp-config.erb", "/tmp/wp-config.php")
-      run "#{sudo} mv /tmp/wp-config.php #{release_path}/#{wordpress_dir}/"
-    end
-  end
 end
