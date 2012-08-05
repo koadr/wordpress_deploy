@@ -26,5 +26,4 @@ namespace :wordpress do
       run "ln -nfs #{shared_path}/uploads/ #{release_path}/#{wordpress_dir}/wp-content/uploads"
     end
   end
-
 end
