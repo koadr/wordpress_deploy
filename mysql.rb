@@ -15,7 +15,7 @@ namespace :mysql do
   MYSQL
     run "mysql --user=root --host=localhost --password=#{admin_password} --execute=\"#{sql}\""
   end
-  after "deploy:setup", "mysql:create_database"
+  after "deploy:setup", "mysql:create_db"
 
 
   desc <<-DESC

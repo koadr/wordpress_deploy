@@ -1,6 +1,5 @@
 set :app_symlinks, ["uploads"]
 before  'deploy:update_code', 'wordpress:symlinks:setup'
-after  'deploy:finalize_update', 'wordpress:config:upload_config'
 after  'deploy:symlink', 'wordpress:symlinks:uploads'
 
 namespace :wordpress do
@@ -23,7 +22,9 @@ namespace :wordpress do
 
     desc "Moves upload directory in #{shared_path} to wp-content/uploads folder in #{release_path}."
     task :uploads, :roles => :app do
-      run "ln -nfs #{shared_path}/uploads/ #{release_path}/#{wordpress_dir}/wp-content/uploads"
+      upload("application/wp-content/uploads/", "#{shared_path}/", :via=> :scp, :recursive => true)
+      run "#{sudo} chmod 777 -R #{shared_path}/uploads/"
+      run "ln -nfs #{shared_path}/uploads/ #{current_path}/application/wp-content/uploads"
     end
   end
 end

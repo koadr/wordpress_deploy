@@ -1,6 +1,6 @@
 # domain:  <%= domain %>
 # public: <%= current_path %>/<%= wordpress_dir %>
-<VirtualHost *:<%= port %>>
+<VirtualHost *:80 >
 
   # Admin email, Server Name (domain name) and any aliases
   ServerAdmin <%= email %>
@@ -10,7 +10,7 @@
 
   # Index file and Document Root (where the public files are located)
   DirectoryIndex index.html index.php
-  DocumentRoot <%= current_path %>/<%= wordpress_dir %>
+  DocumentRoot <%= current_path %>/application
 
 
   # Custom log file locations
